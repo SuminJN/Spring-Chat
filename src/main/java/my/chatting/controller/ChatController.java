@@ -2,8 +2,9 @@ package my.chatting.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.chatting.entity.ChatMessage;
+import my.chatting.entity.Chat;
 import my.chatting.entity.Type;
+import my.chatting.repository.ChatRepository;
 import my.chatting.service.RedisPublisher;
 import my.chatting.repository.ChatRoomRepository;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,12 +18,14 @@ public class ChatController {
     private final RedisPublisher redisPublisher;
     private final ChatRoomRepository chatRoomRepository;
 
+    private final ChatRepository chatRepository;
+
     /**
      * websocket "/pub/chat/message"로 들어오는 메시징 처리
      */
 
     @MessageMapping("/chat/message")
-    public void message(ChatMessage message) {
+    public void message(Chat message) {
         log.info("Received message: {}", message);
 
         if (Type.ENTER.equals(message.getType())) {
@@ -32,5 +35,7 @@ public class ChatController {
         }
 
         redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
+        chatRepository.save(message);
     }
+
 }

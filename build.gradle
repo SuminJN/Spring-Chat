@@ -27,9 +27,6 @@ dependencies {
     // redis(채팅방 저장용)
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-    //freemarker
-    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-
     //web socket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
@@ -43,9 +40,6 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'mysql:mysql-connector-java:8.0.15'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'

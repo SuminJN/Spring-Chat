@@ -1,11 +1,11 @@
 package my.chatting.entity;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-@Data
+@Getter
 public class ChatRoom implements Serializable {
 
     private static final long serialVersionUID = 6494678977089006639L;
