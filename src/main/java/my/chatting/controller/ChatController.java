@@ -10,6 +10,8 @@ import my.chatting.repository.ChatRoomRepository;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Controller
 @Slf4j
@@ -35,6 +37,8 @@ public class ChatController {
         }
 
         redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
+
+        message.setTime(LocalDateTime.now());
         chatRepository.save(message);
     }
 
